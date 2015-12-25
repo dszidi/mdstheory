@@ -1,101 +1,103 @@
-var MDSNoteMatrix = [];
-MDSNoteMatrix[0] = ["C", "Dbb","B#"];
-MDSNoteMatrix[1] = ["C#", "Db"];
-MDSNoteMatrix[2] = ["D", "Ebb","C##"];
-MDSNoteMatrix[3] = ["D#", "Eb"];
-MDSNoteMatrix[4] = ["E", "Fb","D##"];
-MDSNoteMatrix[5] = ["F", "Gbb","E#"];
-MDSNoteMatrix[6] = ["F#", "Gb"];
-MDSNoteMatrix[7] = ["G", "Abb","F##"];
-MDSNoteMatrix[8] = ["G#", "Ab"];
-MDSNoteMatrix[9] = ["A", "Bbb","G##"];
-MDSNoteMatrix[10] = ["A#", "Bb"];
-MDSNoteMatrix[11] = ["B", "Cb","A##"];
+var MDSTheory = {};
 
-var MDSWhiteNoteMatrix = ["C","D","E","F","G","A","B"];
+MDSTheory.MDSNoteMatrix = [];
+MDSTheory.MDSNoteMatrix[0] = ["C", "Dbb","B#"];
+MDSTheory.MDSNoteMatrix[1] = ["C#", "Db"];
+MDSTheory.MDSNoteMatrix[2] = ["D", "Ebb","C##"];
+MDSTheory.MDSNoteMatrix[3] = ["D#", "Eb"];
+MDSTheory.MDSNoteMatrix[4] = ["E", "Fb","D##"];
+MDSTheory.MDSNoteMatrix[5] = ["F", "Gbb","E#"];
+MDSTheory.MDSNoteMatrix[6] = ["F#", "Gb"];
+MDSTheory.MDSNoteMatrix[7] = ["G", "Abb","F##"];
+MDSTheory.MDSNoteMatrix[8] = ["G#", "Ab"];
+MDSTheory.MDSNoteMatrix[9] = ["A", "Bbb","G##"];
+MDSTheory.MDSNoteMatrix[10] = ["A#", "Bb"];
+MDSTheory.MDSNoteMatrix[11] = ["B", "Cb","A##"];
 
-var MDSKeySignatureMatrix = new Object(); //DO I NEED THIS?
-MDSKeySignatureMatrix["Cb"] = {type:"flat", accidentals:1, accidentalNames:["Bb","Eb","Ab","Db","Gb","Cb","Fb"]};
-MDSKeySignatureMatrix["Gb"] = {type:"flat", accidentals:1, accidentalNames:["Bb","Eb","Ab","Db","Gb","Cb"]};
-MDSKeySignatureMatrix["Db"] = {type:"flat", accidentals:1, accidentalNames:["Bb","Eb","Ab","Db","Gb"]};
-MDSKeySignatureMatrix["Ab"] = {type:"flat", accidentals:1, accidentalNames:["Bb","Eb","Ab","Db"]};
-MDSKeySignatureMatrix["Eb"] = {type:"flat", accidentals:1, accidentalNames:["Bb","Eb","Ab"]};
-MDSKeySignatureMatrix["Bb"] = {type:"flat", accidentals:1, accidentalNames:["Bb","Eb"]};
-MDSKeySignatureMatrix["F"] = {type:"flat", accidentals:1, accidentalNames:["Bb"]};
-MDSKeySignatureMatrix["C"] = {type:"natural", accidentals:null, accidentalNames:null};
-MDSKeySignatureMatrix["G"] = {type:"sharp", accidentals:1, accidentalNames:["F#"]};
-MDSKeySignatureMatrix["D"] = {type:"sharp", accidentals:2, accidentalNames:["F#","C#"]};
-MDSKeySignatureMatrix["A"] = {type:"sharp", accidentals:3, accidentalNames:["F#","C#","G#"]};
-MDSKeySignatureMatrix["E"] = {type:"sharp", accidentals:4, accidentalNames:["F#","C#","G#","D#"]};
-MDSKeySignatureMatrix["B"] = {type:"sharp", accidentals:5, accidentalNames:["F#","C#","G#","D#","A#"]};
-MDSKeySignatureMatrix["F#"] = {type:"sharp", accidentals:5, accidentalNames:["F#","C#","G#","D#","A#","E#"]};
-MDSKeySignatureMatrix["C#"] = {type:"sharp", accidentals:5, accidentalNames:["F#","C#","G#","D#","A#","E#","B#"]};
+MDSTheory.MDSWhiteNoteMatrix = ["C","D","E","F","G","A","B"];
 
-var MDSIntervalMatrix = new Object();
-MDSIntervalMatrix[0] = ["p1","unison"];
-MDSIntervalMatrix[1] = ["m2"];
-MDSIntervalMatrix[2] = ["M2","dim3"];
-MDSIntervalMatrix[3] = ["m3","aug2"];
-MDSIntervalMatrix[4] = ["M3","dim4"];
-MDSIntervalMatrix[5] = ["p4","aug3"];
-MDSIntervalMatrix[6] = ["dim5","aug4"];
-MDSIntervalMatrix[7] = ["p5","dim6"];
-MDSIntervalMatrix[8] = ["m6","aug5"];
-MDSIntervalMatrix[9] = ["M6","dim7"];
-MDSIntervalMatrix[10] = ["m7","aug6"];
-MDSIntervalMatrix[11] = ["M7"];
-MDSIntervalMatrix[12] = ["p8","octave"];
-MDSIntervalMatrix[13] = ["b9"];
-MDSIntervalMatrix[14] = ["9"];
-MDSIntervalMatrix[15] = ["#9"];
-MDSIntervalMatrix[17] = ["11"];
-MDSIntervalMatrix[18] = ["#11"];
-MDSIntervalMatrix[21] = ["13"];
+MDSTheory.MDSKeySignatureMatrix = new Object(); //DO I NEED THIS?
+MDSTheory.MDSKeySignatureMatrix["Cb"] = {type:"flat", accidentals:1, accidentalNames:["Bb","Eb","Ab","Db","Gb","Cb","Fb"]};
+MDSTheory.MDSKeySignatureMatrix["Gb"] = {type:"flat", accidentals:1, accidentalNames:["Bb","Eb","Ab","Db","Gb","Cb"]};
+MDSTheory.MDSKeySignatureMatrix["Db"] = {type:"flat", accidentals:1, accidentalNames:["Bb","Eb","Ab","Db","Gb"]};
+MDSTheory.MDSKeySignatureMatrix["Ab"] = {type:"flat", accidentals:1, accidentalNames:["Bb","Eb","Ab","Db"]};
+MDSTheory.MDSKeySignatureMatrix["Eb"] = {type:"flat", accidentals:1, accidentalNames:["Bb","Eb","Ab"]};
+MDSTheory.MDSKeySignatureMatrix["Bb"] = {type:"flat", accidentals:1, accidentalNames:["Bb","Eb"]};
+MDSTheory.MDSKeySignatureMatrix["F"] = {type:"flat", accidentals:1, accidentalNames:["Bb"]};
+MDSTheory.MDSKeySignatureMatrix["C"] = {type:"natural", accidentals:null, accidentalNames:null};
+MDSTheory.MDSKeySignatureMatrix["G"] = {type:"sharp", accidentals:1, accidentalNames:["F#"]};
+MDSTheory.MDSKeySignatureMatrix["D"] = {type:"sharp", accidentals:2, accidentalNames:["F#","C#"]};
+MDSTheory.MDSKeySignatureMatrix["A"] = {type:"sharp", accidentals:3, accidentalNames:["F#","C#","G#"]};
+MDSTheory.MDSKeySignatureMatrix["E"] = {type:"sharp", accidentals:4, accidentalNames:["F#","C#","G#","D#"]};
+MDSTheory.MDSKeySignatureMatrix["B"] = {type:"sharp", accidentals:5, accidentalNames:["F#","C#","G#","D#","A#"]};
+MDSTheory.MDSKeySignatureMatrix["F#"] = {type:"sharp", accidentals:5, accidentalNames:["F#","C#","G#","D#","A#","E#"]};
+MDSTheory.MDSKeySignatureMatrix["C#"] = {type:"sharp", accidentals:5, accidentalNames:["F#","C#","G#","D#","A#","E#","B#"]};
 
-var MDSScaleDictionary = []; 
+MDSTheory.MDSIntervalMatrix = new Object();
+MDSTheory.MDSIntervalMatrix[0] = ["p1","unison"];
+MDSTheory.MDSIntervalMatrix[1] = ["m2"];
+MDSTheory.MDSIntervalMatrix[2] = ["M2","dim3"];
+MDSTheory.MDSIntervalMatrix[3] = ["m3","aug2"];
+MDSTheory.MDSIntervalMatrix[4] = ["M3","dim4"];
+MDSTheory.MDSIntervalMatrix[5] = ["p4","aug3"];
+MDSTheory.MDSIntervalMatrix[6] = ["dim5","aug4"];
+MDSTheory.MDSIntervalMatrix[7] = ["p5","dim6"];
+MDSTheory.MDSIntervalMatrix[8] = ["m6","aug5"];
+MDSTheory.MDSIntervalMatrix[9] = ["M6","dim7"];
+MDSTheory.MDSIntervalMatrix[10] = ["m7","aug6"];
+MDSTheory.MDSIntervalMatrix[11] = ["M7"];
+MDSTheory.MDSIntervalMatrix[12] = ["p8","octave"];
+MDSTheory.MDSIntervalMatrix[13] = ["b9"];
+MDSTheory.MDSIntervalMatrix[14] = ["9"];
+MDSTheory.MDSIntervalMatrix[15] = ["#9"];
+MDSTheory.MDSIntervalMatrix[17] = ["11"];
+MDSTheory.MDSIntervalMatrix[18] = ["#11"];
+MDSTheory.MDSIntervalMatrix[21] = ["13"];
+
+MDSTheory.MDSScaleDictionary = []; 
 //Instead of root, we use perfect 1 or p1
-MDSScaleDictionary['Major'] = ["p1", "M2", "M3", "p4", "p5", "M6", "M7"];
-MDSScaleDictionary['Minor'] = ["p1", "M2", "m3", "p4", "p5", "m6", "m7"];
-MDSScaleDictionary['Harmonic Minor'] = ["p1", "M2", "m3", "p4", "p5", "m6", "M7"];
-MDSScaleDictionary['Melodic Minor'] = ["p1", "M2", "m3", "p4", "p5", "M6", "M7"];
-MDSScaleDictionary['Niavent'] = ["p1", "M2", "m3", "aug4", "p5", "m6", "M7"];
-MDSScaleDictionary['Ousak'] = ["p1", "m2", "m3", "p4", "p5", "m6", "m7"];
-MDSScaleDictionary['Hitzaz'] = ["p1", "m2", "M3", "p4", "p5", "m6", "m7"];
-MDSScaleDictionary['Sabach'] = ["p1", "M2", "m3", "dim4", "p5", "m6", "m7"];
-MDSScaleDictionary['Kiourdi'] = ["p1", "M2", "m3", "p4", "dim5", "M6", "m7"];
+MDSTheory.MDSScaleDictionary['Major'] = ["p1", "M2", "M3", "p4", "p5", "M6", "M7"];
+MDSTheory.MDSScaleDictionary['Minor'] = ["p1", "M2", "m3", "p4", "p5", "m6", "m7"];
+MDSTheory.MDSScaleDictionary['Harmonic Minor'] = ["p1", "M2", "m3", "p4", "p5", "m6", "M7"];
+MDSTheory.MDSScaleDictionary['Melodic Minor'] = ["p1", "M2", "m3", "p4", "p5", "M6", "M7"];
+MDSTheory.MDSScaleDictionary['Niavent'] = ["p1", "M2", "m3", "aug4", "p5", "m6", "M7"];
+MDSTheory.MDSScaleDictionary['Ousak'] = ["p1", "m2", "m3", "p4", "p5", "m6", "m7"];
+MDSTheory.MDSScaleDictionary['Hitzaz'] = ["p1", "m2", "M3", "p4", "p5", "m6", "m7"];
+MDSTheory.MDSScaleDictionary['Sabach'] = ["p1", "M2", "m3", "dim4", "p5", "m6", "m7"];
+MDSTheory.MDSScaleDictionary['Kiourdi'] = ["p1", "M2", "m3", "p4", "dim5", "M6", "m7"];
 
-var MDSChordDictionary = [];
+MDSTheory.MDSChordDictionary = [];
 //Will be required by chordFromNotes()
 
-function flipAllNotes(p){
+MDSTheory.flipAllNotes  = function(p){
 	var newOrder = [];
-	var start = MDSGetMatrixIndex(p);
+	var start = MDSTheory.MDSGetMatrixIndex(p);
 	var finish = start + 12;
 	for (var i = start; i < finish; i++){
 		if(i >= 12){
-			newOrder.push(MDSNoteMatrix[i - 12]);	
+			newOrder.push(MDSTheory.MDSNoteMatrix[i - 12]);	
 		} else {
-			newOrder.push(MDSNoteMatrix[i]);
+			newOrder.push(MDSTheory.MDSNoteMatrix[i]);
 		}
 	}
 	return newOrder;
 }
 
-function flipWhites(p){
+MDSTheory.flipWhites  = function(p){
 	var newOrder = [];
-	var start = MDSWhiteNoteMatrix.indexOf(p.split("")[0]); //leave out accidentals
+	var start = MDSTheory.MDSWhiteNoteMatrix.indexOf(p.split("")[0]); //leave out accidentals
 	var finish = start + 7;
 	for (var i = start; i < finish; i++){
 		if(i >= 7){
-			newOrder.push(MDSWhiteNoteMatrix[i - 7]);	
+			newOrder.push(MDSTheory.MDSWhiteNoteMatrix[i - 7]);	
 		} else {
-			newOrder.push(MDSWhiteNoteMatrix[i]);
+			newOrder.push(MDSTheory.MDSWhiteNoteMatrix[i]);
 		}
 	}
 	return newOrder;
 }
 
-function MDSGetMatrixType(n){
+MDSTheory.MDSGetMatrixType  = function(n){
 	var s = n.split("");
 	var pitch = n.substring(0,s.length-1);
 	var octave = parseInt(s[s.length-1]);
@@ -118,10 +120,10 @@ function MDSGetMatrixType(n){
 	return type;
 }
 
-function MDSGetMatrixIndex(pitch){
+MDSTheory.MDSGetMatrixIndex  = function(pitch){
 	var index;
-	for (var x in MDSNoteMatrix){
-		var alias = MDSNoteMatrix[x];
+	for (var x in MDSTheory.MDSNoteMatrix){
+		var alias = MDSTheory.MDSNoteMatrix[x];
 		for (var y in alias){
 			if (alias[y] === pitch){
 				index = x;
@@ -131,17 +133,17 @@ function MDSGetMatrixIndex(pitch){
 	return parseInt(index);
 }
 
-function noteToMidi(n){
+MDSTheory.noteToMidi  = function(n){
 	var result;
 	var index;
 	var s = n.split("");
 	var pitch = n.substring(0,s.length-1);
 	var octave = parseInt(s[s.length-1]);
-	//var type = MDSGetMatrixType(n);
+	//var type = MDSTheory.MDSGetMatrixType(n);
 	
-	//index = MDSGetMatrixIndex(pitch,type);
-	for (var x in MDSNoteMatrix){
-		var alias = MDSNoteMatrix[x];
+	//index = MDSTheory.MDSGetMatrixIndex(pitch,type);
+	for (var x in MDSTheory.MDSNoteMatrix){
+		var alias = MDSTheory.MDSNoteMatrix[x];
 		for (var y in alias){
 			if (alias[y] === pitch){
 				index = x;
@@ -153,7 +155,7 @@ function noteToMidi(n){
 	return result;
 }
 
-function midiToNote(int,type,pitch){
+MDSTheory.midiToNote  = function(int,type,pitch){
 /*
 Midi notes start at A0. Midi note numbers start at 21. 
 We must compensate for notes below C1 and midi numbers from 0-20.
@@ -169,68 +171,68 @@ if(int<21 || int > 108){
 //Find Octave and 
 var octave = Math.floor(int / 12) - 1;
 index = int - ((octave + 1) * 12);
-//console.log("function midiToNote: note = " + int + " && type = " + type + " && pitch = " + pitch)
+//console.log("MDSTheory.midiToNote  = function: note = " + int + " && type = " + type + " && pitch = " + pitch)
 /*switch(type){
 	case "natural":
-	if(MDSNoteMatrix[index].natural === null){
-		result = MDSNoteMatrix[index].sharp;
+	if(MDSTheory.MDSNoteMatrix[index].natural === null){
+		result = MDSTheory.MDSNoteMatrix[index].sharp;
 	} else {
-		result = MDSNoteMatrix[index].natural;
+		result = MDSTheory.MDSNoteMatrix[index].natural;
 	}
 	break;
 	
 	case "flat":
-	result = MDSNoteMatrix[index].flat;
+	result = MDSTheory.MDSNoteMatrix[index].flat;
 	break;
 
 	case "sharp":
-	result = MDSNoteMatrix[index].sharp;
+	result = MDSTheory.MDSNoteMatrix[index].sharp;
 	break;
 	
 	default:
-	if(MDSNoteMatrix[index].natural === null){
-		result = MDSNoteMatrix[index].sharp;
+	if(MDSTheory.MDSNoteMatrix[index].natural === null){
+		result = MDSTheory.MDSNoteMatrix[index].sharp;
 	} else {
-		result = MDSNoteMatrix[index].natural;
+		result = MDSTheory.MDSNoteMatrix[index].natural;
 	}
 	break;
 }*/
 switch(type){
 	case "flat":
-	result = MDSNoteMatrix[index][1];
+	result = MDSTheory.MDSNoteMatrix[index][1];
 	break;
 
 	case "sharp":
-	if(MDSNoteMatrix[index].length === 3){
-		result = MDSNoteMatrix[index][2];	
+	if(MDSTheory.MDSNoteMatrix[index].length === 3){
+		result = MDSTheory.MDSNoteMatrix[index][2];	
 	} else {
-		result = MDSNoteMatrix[index][0];
+		result = MDSTheory.MDSNoteMatrix[index][0];
 	}
 	break;
 	
 	case "pitch":
-	for (var x in MDSNoteMatrix[index]){
-		//console.log("matrix = " + MDSNoteMatrix[index][x].split("")[0] + " && pitch = " + pitch)
-		if(MDSNoteMatrix[index][x].split("")[0] === pitch){
-			//console.log(MDSNoteMatrix[index][x])
-			result = MDSNoteMatrix[index][x];
+	for (var x in MDSTheory.MDSNoteMatrix[index]){
+		//console.log("matrix = " + MDSTheory.MDSNoteMatrix[index][x].split("")[0] + " && pitch = " + pitch)
+		if(MDSTheory.MDSNoteMatrix[index][x].split("")[0] === pitch){
+			//console.log(MDSTheory.MDSNoteMatrix[index][x])
+			result = MDSTheory.MDSNoteMatrix[index][x];
 			break;
 		}
 	}
 	break;
 	
 	default:
-	result = MDSNoteMatrix[index][0];
+	result = MDSTheory.MDSNoteMatrix[index][0];
 	break;
 }
 return result+octave;
 }
 
-function getSemiTones(x,y){
+MDSTheory.getSemiTones  = function(x,y){
 	//console.log("x = " + noteToMidi(x) + " y = " + noteToMidi(y))
 	var result;
 	if ( isNaN(x) === true && isNaN(y) === true){ //if args are strings
-		result = noteToMidi(y) - noteToMidi(x);
+		result = MDSTheory.noteToMidi(y) - MDSTheory.noteToMidi(x);
 	} else if (isNaN(x) === false && isNaN(y) === false) { //if args are numbers 
 		result = y - x;
 	} else {
@@ -239,7 +241,7 @@ function getSemiTones(x,y){
 	return result;
 }
 
-function getNoteType(n){
+MDSTheory.getNoteType  = function(n){
 	/*
 	Determines if note is sharp or flat. Useful when converting 
 	midi notes to regular notes.
@@ -258,13 +260,13 @@ function getNoteType(n){
 	return type
 }
 
-function adjustOctave(root,n){
+MDSTheory.adjustOctave  = function(root,n){
 	/*
 	Interval calculating functions are semantically correct. 
-	This function brings the interval to with an octave above root
+	This MDSTheory.brings  = function the interval to with an octave above root
 	*/
 	var adjNote;
-	var checkCents = noteToMidi(n) - noteToMidi(root)
+	var checkCents = MDSTheory.noteToMidi(n) - MDSTheory.noteToMidi(root)
 	//console.log('Checked semitones = ' + checkCents)
 	if(checkCents < 0 || checkCents > 13){
 		//console.log('lower than root: ' + checkOctaves);
@@ -273,8 +275,8 @@ function adjustOctave(root,n){
 		var multiplier = Math.ceil(distOct*-1)
 		//console.log('Multiplier = ' + multiplier);
 		//console.log("new midi note = " + noteToMidi(n))		
-		var newMidiNote = noteToMidi(n) + (12 * multiplier);
-		adjNote = midiToNote(newMidiNote,getNoteType(n));
+		var newMidiNote = MDSTheory.noteToMidi(n) + (12 * multiplier);
+		adjNote = MDSTheory.midiToNote(newMidiNote,MDSTheory.getNoteType(n));
 	} else {
 		//console.log('Note within range, note = ' + n)
 		adjNote = n;
@@ -283,7 +285,7 @@ function adjustOctave(root,n){
 	return adjNote
 }
 
-function getInterval(root, int, adj){
+MDSTheory.getInterval  = function(root, int, adj){
 	/*
 	FYI: Arguments must include octave number
 	If interval is not within an octave of root. 
@@ -291,17 +293,17 @@ function getInterval(root, int, adj){
 	Octaves are adjusted by default. 
 	*/
 	if(adj !== 0){
-		int = adjustOctave(root, int);
+		int = MDSTheory.adjustOctave(root, int);
 	}
 	
 	var result;
 	var s = root.split("");
 	var pitch = root.match(/\D+/g)[0];
 	var rootOctave = root.substring(s.length-1);
-	var st = getSemiTones(root,int);
-	var base = flipWhites(pitch);
+	var st = MDSTheory.getSemiTones(root,int);
+	var base = MDSTheory.flipWhites(pitch);
 	var ai = base.indexOf(int.split("")[0])+1; //absoluteInterval 
-	console.log("preconditional ai = " + ai)
+	//console.log("preconditional ai = " + ai)
 	 if (st === 12){
 		ai = 8;
 	} else if (st === 0){
@@ -309,11 +311,11 @@ function getInterval(root, int, adj){
 	} else if(st > 11){
 		ai += 7;
 	}
-	console.log("st = " + st + " && ai = " + ai)
-	for (var x in MDSIntervalMatrix[st]){
-		var alias = MDSIntervalMatrix[st][x];
+	//console.log("st = " + st + " && ai = " + ai)
+	for (var x in MDSTheory.MDSIntervalMatrix[st]){
+		var alias = MDSTheory.MDSIntervalMatrix[st][x];
 		var num;
-		console.log("loop alias = " + alias)
+		//console.log("loop alias = " + alias)
 		switch(ai){
 		case 1:
 		result = "unison";
@@ -326,10 +328,10 @@ function getInterval(root, int, adj){
 		default:
 		if(ai > 9){
 			num = alias.substring(alias.split("").length-2);
-			console.log('condition: ai > 9... ai = ' + ai + ' && num = ' + num + "\n")
+			//console.log('condition: ai > 9... ai = ' + ai + ' && num = ' + num + "\n")
 		} else {
 			num = alias.substring(alias.split("").length-1);
-			console.log('condition: else... ai = ' + ai + ' && num = ' + num + "\n");
+			//console.log('condition: else... ai = ' + ai + ' && num = ' + num + "\n");
 		}
 		if (parseInt(num) === ai){
 			result = alias;
@@ -347,17 +349,17 @@ function getInterval(root, int, adj){
 	return result;
 }
 
-function getNoteFromInterval(n, int){
-	//console.log("start function args: note = " + n + " && interval = " + int)
+MDSTheory.getNoteFromInterval  = function(n, int){
+	//console.log("start MDSTheory.args  = function: note = " + n + " && interval = " + int)
 	var result;
 	var st;
-	var note = noteToMidi(n);
+	var note = MDSTheory.noteToMidi(n);
 	//console.log("note = " + note)
 	var newNote;
 	
 	//SEMANTICS
 	var pitch = n.split("")[0];
-	var newScale = flipWhites(pitch);
+	var newScale = MDSTheory.flipWhites(pitch);
 	var num = Number(int.match(/\d+/g));
 	var desc = int.match(/\D/);
 	//console.log("preconditional: num = " + num + " && desc = " + desc)
@@ -368,51 +370,51 @@ function getNoteFromInterval(n, int){
 	}
 	var ap = newScale[num-1];
 	//console.log("newScale = " + newScale + " && num = " + num)
-	for (var x in MDSIntervalMatrix){
-		var item = MDSIntervalMatrix[x];
+	for (var x in MDSTheory.MDSIntervalMatrix){
+		var item = MDSTheory.MDSIntervalMatrix[x];
 		var test = item.indexOf(int);
 		st = parseInt(x);
 		if (test !== -1){
 			newNote = parseInt(note) + st;
 			//console.log("newNote = " + newNote + " && ap = " + ap);
-			result = midiToNote(newNote, "pitch", ap);
+			result = MDSTheory.midiToNote(newNote, "pitch", ap);
 			break;
 		}
 	}
 	return result;
 }
 
-function getScale(scale,root,octave){
+MDSTheory.getScale  = function(scale,root,octave){
 	if(octave){
 		root = root+octave;
 	} else {
 		root = root+"4";
 	}
 	var result = [];
-	for(var x in MDSScaleDictionary[scale]){
-		var interval = MDSScaleDictionary[scale][x];
-		var note = getNoteFromInterval(root,interval);
+	for(var x in MDSTheory.MDSScaleDictionary[scale]){
+		var interval = MDSTheory.MDSScaleDictionary[scale][x];
+		var note = MDSTheory.getNoteFromInterval(root,interval);
 		result.push(note);
 	}
 	return result;
 }
 
-function getChord(chord,key){
-return "This function is incomplete";
+MDSTheory.getChord  = function(chord,key){
+return "This MDSTheory.is  = function incomplete";
 }
 
 //INCOMPLETE
-function chordFromNotes(arr){
+MDSTheory.chordFromNotes  = function(arr){
 /*
 Requires a chord dictionary
-This function will calculate intervals and then match them up in the chord dictionary. To start with, it won't be able to detect inversions.
-This function may be redundant if used in Max4Live as Max will probably already have an object to do this.
+This MDSTheory.will  = function calculate intervals and then match them up in the chord dictionary. To start with, it won't be able to detect inversions.
+This MDSTheory.may  = function be redundant if used in Max4Live as Max will probably already have an object to do this.
 */
 	console.log("Chord Tones = " + arr);
 	var origOrder = [];
 	for(var x in arr){
-		origOrder.push(MDSGetMatrixIndex(arr[x]));
-		var newMatrix = flipAllNotes(MDSNoteMatrix);
+		origOrder.push(MDSTheory.MDSGetMatrixIndex(arr[x]));
+		var newMatrix = MDSTheory.flipAllNotes(MDSTheory.MDSNoteMatrix);
 		var query;
 		var result;
 		/*for(var y in newMatrix){
@@ -422,5 +424,8 @@ This function may be redundant if used in Max4Live as Max will probably already 
 		console.log(arr[x] + " = " + i)*/
 	}
 	console.log(origOrder)
-	return "This function is incomplete"
+	return "This MDSTheory.is  = function incomplete"
 }
+
+//For Testing in Node.js only
+module.exports = MDSTheory;

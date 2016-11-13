@@ -36,7 +36,6 @@
 | `getInterval` | Returns the calculated interval between two pitches | 'root pitch', 'interval pitch', 'adjust octave' |
 | `getNoteFromInterval` | Returns the pitch of an interval | 'root_pitch', 'interval' eg. 'p5' |
 | `getScale` | Returns an array of pitches | 'scale_name', 'root', 'octave' |
-| `` | t | t |
 
 ### Examples ###
 

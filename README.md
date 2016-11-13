@@ -43,7 +43,8 @@
 * Uncomment the last line of MDSTheory.js for testing in Node.js
 
 ~~~~
-console.log('test');
+//For Testing in Node.js only
+module.exports = MDSTheory;
 ~~~~
 ### License ###
 

@@ -38,11 +38,10 @@
 | `getNoteFromInterval` | Returns the pitch of an interval | 'root_pitch', 'interval' eg. 'p5' |
 | `getScale` | Returns an array of pitches | 'scale_name', 'root', 'octave' |
 
-### Examples ###
+### Notes ###
 
-* This was set up to be tested via Node.js. Comment out the last line of MDSTheory.js for other environments to avoid errors.
-* Available functions
-* Other guidelines
+* Uncomment the last line of MDSTheory.js for testing in Node.js
+
 ~~~~
 console.log('test');
 ~~~~

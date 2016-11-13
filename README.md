@@ -16,9 +16,9 @@
 * Deployment instructions
 
 ### Functions ###
-| Function name | Description                    |
-| ------------- | ------------------------------ |
-| `midiToNote()`| converts midi (0-127) to note (note/octave) |
+| Function name | Description                    | Arguments            |
+| ------------- | ------------------------------ |--------------------- |
+| `midiToNote()`| Converts midi (0-127) to note (note/octave) | integer, type (flat/sharp) type is optional and defaults to sharp |
 
 ### Examples ###
 

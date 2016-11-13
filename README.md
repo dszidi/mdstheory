@@ -18,6 +18,7 @@
 ### About the Syntax ###
 * Pitches are formatted pitch+octave. For example, middle C is 'C4'.
 * Intervals use the following table as reference:
+
 | Interval Type | Modifier | Example |
 | ------------- | -------- | ------- |
 | Major         | M        | M3 (major 3rd) |

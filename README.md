@@ -18,7 +18,12 @@
 ### Functions ###
 | Function name | Description                    | Arguments            |
 | ------------- | ------------------------------ |--------------------- |
-| `midiToNote()`| Converts midi (0-127) to note (note/octave) | integer, type (flat/sharp) NOTE: Type is optional and defaults to 'sharp' |
+| `midiToNote()`| Converts midi (0-127) to pitch (note/octave) | integer, type (flat/sharp) NOTE: Type is optional and defaults to 'sharp' |
+| `noteToMidi` | Converts a pitch to a midi value | pitch eg. 'C#4' |
+| `getInterval` | Returns the calculated interval between two pitches | 'root pitch', 'interval pitch', 'adjust octave' |
+| `getNoteFromInterval` | Returns the pitch of an interval | 'root_pitch', 'interval' eg. 'p5' |
+| `getScale` | Returns an array of pitches | 'scale_name', 'root', 'octave' |
+| `` | t | t |
 
 ### Examples ###
 

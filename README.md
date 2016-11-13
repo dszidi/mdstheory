@@ -19,8 +19,9 @@
 
 * This was set up to be tested via Node.js. Comment out the last line of MDSTheory.js for other environments to avoid errors.
 * Available functions
-    console.log('test');
 * Other guidelines
+
+    console.log('test');
 
 ### License ###
 

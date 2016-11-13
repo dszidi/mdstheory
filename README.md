@@ -15,6 +15,18 @@
 * How to run tests
 * Deployment instructions
 
+### About the Syntax ###
+* Pitches are formatted pitch+octave. For example, middle C is 'C4'.
+* Intervals use the following table as reference:
+| Interval Type | Modifier | Example |
+| ------------- | -------- | ------- |
+| Major         | M        | M3 (major 3rd) |
+| Minor | m | m3 (minor 3rd) |
+| Perfect | p | p5 (perfect 5th) |
+| Diminished | dim | dim5 (diminished 5th) |
+| Augmented | aug | aug4 (augmented 4th) |
+
+
 ### Functions ###
 | Function name | Description                    | Arguments            |
 | ------------- | ------------------------------ |--------------------- |

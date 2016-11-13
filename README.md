@@ -16,6 +16,7 @@
 * Deployment instructions
 
 ### About the Syntax ###
+* For the most part, arguments are passed in as strings. 
 * Pitches are formatted pitch+octave. For example, middle C is 'C4'.
 * Intervals use the following table as reference:
 

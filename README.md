@@ -1,6 +1,4 @@
-# README #
-
-# MDSTheory #
+# MDSTheory README #
 
 ### A general purpose music theory engine written in javascript. ###
 

@@ -402,4 +402,4 @@ This MDSTheory.may  = function be redundant if used in Max4Live as Max will prob
 }
 
 //For Testing in Node.js only
-module.exports = MDSTheory;
+//module.exports = MDSTheory;

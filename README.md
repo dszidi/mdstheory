@@ -20,9 +20,9 @@
 * This was set up to be tested via Node.js. Comment out the last line of MDSTheory.js for other environments to avoid errors.
 * Available functions
 * Other guidelines
-
-    console.log('test');
-
+~~~~
+console.log('test');
+~~~~
 ### License ###
 
 * Standard 3 clause BSD license

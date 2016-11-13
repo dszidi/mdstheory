@@ -171,32 +171,6 @@ if(int<21 || int > 108){
 //Find Octave and 
 var octave = Math.floor(int / 12) - 1;
 index = int - ((octave + 1) * 12);
-//console.log("MDSTheory.midiToNote  = function: note = " + int + " && type = " + type + " && pitch = " + pitch)
-/*switch(type){
-	case "natural":
-	if(MDSTheory.MDSNoteMatrix[index].natural === null){
-		result = MDSTheory.MDSNoteMatrix[index].sharp;
-	} else {
-		result = MDSTheory.MDSNoteMatrix[index].natural;
-	}
-	break;
-	
-	case "flat":
-	result = MDSTheory.MDSNoteMatrix[index].flat;
-	break;
-
-	case "sharp":
-	result = MDSTheory.MDSNoteMatrix[index].sharp;
-	break;
-	
-	default:
-	if(MDSTheory.MDSNoteMatrix[index].natural === null){
-		result = MDSTheory.MDSNoteMatrix[index].sharp;
-	} else {
-		result = MDSTheory.MDSNoteMatrix[index].natural;
-	}
-	break;
-}*/
 switch(type){
 	case "flat":
 	result = MDSTheory.MDSNoteMatrix[index][1];

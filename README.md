@@ -15,6 +15,11 @@
 * How to run tests
 * Deployment instructions
 
+### Functions ###
+| Function name | Description                    |
+| ------------- | ------------------------------ |
+| `midiToNote()`| converts midi (0-127) to note (note/octave) |
+
 ### Examples ###
 
 * This was set up to be tested via Node.js. Comment out the last line of MDSTheory.js for other environments to avoid errors.

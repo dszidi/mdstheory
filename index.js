@@ -6,9 +6,11 @@ var theory = require('./MDSTheory');
 //var note = theory.getNoteFromInterval("A4","M3");
 //var note = theory.midiToNote(63,'flat');
 //var note = theory.noteToMidi("C4");
-//var note = theory.getInterval("C3","D#5",1);
+//var note = theory.getInterval("G4","C4",1);
 //var note = theory.getScale("Niavent","Eb","6");
-var note = theory.chordFromNotes(["Eb", "C", "G"]);/*NOT IMPLEMENTED YET*/
+//var note = theory.chordFromNotes(["Eb", "C", "G"]);/*NOT IMPLEMENTED YET*/
+//var note = theory.adjustOctave("G4","C4");
+var note = theory.splitPitch("G#4");
 
 console.log("Result = " + note);
 

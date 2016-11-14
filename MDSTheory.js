@@ -69,6 +69,16 @@ MDSTheory.MDSScaleDictionary['Kiourdi'] = ["p1", "M2", "m3", "p4", "dim5", "M6",
 MDSTheory.MDSChordDictionary = [];
 //Will be required by chordFromNotes()
 
+MDSTheory.splitPitch = function(n){
+// A helper function that takes a note value like Db4 and returns an array containing the pitch and octave separated
+        //SEMANTICS
+	var octave = Number(n.match(/\d+/g));
+	var pitch = n.split(octave)[0];
+	console.log("Pitch = " + pitch + " && octave = " + octave); 
+        var result = [pitch,octave];
+        return result;
+}
+
 MDSTheory.flipAllNotes  = function(p){
 	var newOrder = [];
 	var start = MDSTheory.MDSGetMatrixIndex(p);
@@ -384,22 +394,29 @@ Requires a chord dictionary
 This MDSTheory.will  = function calculate intervals and then match them up in the chord dictionary. To start with, it won't be able to detect inversions.
 This MDSTheory.may  = function be redundant if used in Max4Live as Max will probably already have an object to do this.
 */
+
+// Sort notes from lowest to highest
+// 
+
 	console.log("Chord Tones = " + arr);
 	var origOrder = [];
+	var intervals = [];
 	for(var x in arr){
+	        var newMatrix = MDSTheory.flipAllNotes(arr[x]);
+                //console.log("newMatrix = " + newMatrix);
+	        var query;
 		origOrder.push(MDSTheory.MDSGetMatrixIndex(arr[x]));
-		var newMatrix = MDSTheory.flipAllNotes(MDSTheory.MDSNoteMatrix);
-		var query;
 		var result;
-		/*for(var y in newMatrix){
+		for(var y in newMatrix){
 			query = newMatrix[y].indexOf(arr[x]);
 			if(query === 0){ result = y; }
 		}
-		console.log(arr[x] + " = " + i)*/
+		//console.log(arr[x] + " = " + newMatrix);
 	}
-	console.log(origOrder)
-	return "This MDSTheory.is  = function incomplete"
+	//return "This MDSTheory.is  = function incomplete"
+        return result;
 }
 
+
 //For Testing in Node.js only
-//module.exports = MDSTheory;
+module.exports = MDSTheory;

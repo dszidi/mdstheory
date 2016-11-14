@@ -240,6 +240,10 @@ MDSTheory.getNoteType  = function(n){
 		case "#":
 		type = 'sharp';
 		break;
+
+                default:
+                type = 'natural';
+                break;
 	}
 	return type
 }
@@ -247,7 +251,7 @@ MDSTheory.getNoteType  = function(n){
 MDSTheory.adjustOctave  = function(root,n){
 	/*
 	Interval calculating functions are semantically correct. 
-	This MDSTheory.brings  = function the interval to with an octave above root
+	This function brings the interval to within an octave above root
 	*/
 	var adjNote;
 	var checkCents = MDSTheory.noteToMidi(n) - MDSTheory.noteToMidi(root)

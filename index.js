@@ -9,8 +9,8 @@ var theory = require('./MDSTheory');
 //var note = theory.getInterval("G4","C4",1);
 //var note = theory.getScale("Niavent","Eb","6");
 //var note = theory.chordFromNotes(["Eb", "C", "G"]);/*NOT IMPLEMENTED YET*/
-//var note = theory.adjustOctave("G4","C4");
-var note = theory.splitPitch("G#4");
+var note = theory.adjustOctave("G5","D#4");
+//var note = theory.splitPitch("G#4");
 
 console.log("Result = " + note);
 

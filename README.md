@@ -23,11 +23,15 @@
 ### Functions ###
 | Function name | Description                    | Arguments            |
 | ------------- | ------------------------------ |--------------------- |
-| `midiToNote()`| Converts midi (0-127) to pitch (note/octave) | integer, type (flat/sharp) NOTE: Type is optional and defaults to 'sharp' |
-| `noteToMidi` | Converts a pitch to a midi value | pitch eg. 'C#4' |
-| `getInterval` | Returns the calculated interval between two pitches | 'root pitch', 'interval pitch', 'adjust octave' |
-| `getNoteFromInterval` | Returns the pitch of an interval | 'root_pitch', 'interval' eg. 'p5' |
-| `getScale` | Returns an array of pitches | 'scale_name', 'root', 'octave' |
+| `midiToNote()`| Converts midi (0-127) to pitch (note/octave) | 'integer', 'type' (flat/sharp) NOTE: Type is optional and defaults to 'sharp' |
+| `noteToMidi()` | Converts a pitch to a midi value | pitch eg. 'C#4' |
+| `splitPitch()` | Converts a note value to an array with separated pitch and octave values| 'note' eg. 'C4' |
+| `compareNotes()` | Returns 0 if the midi value of two notes are the same eg. Comparing C#4 and Db4 will return 0 | 'noteA', 'noteB' |
+| `getInterval()` | Returns the calculated interval between two pitches | 'root pitch', 'interval pitch', 'adjust octave' |
+| `getNoteFromInterval()` | Returns the pitch of an interval | 'root_pitch', 'interval' eg. 'p5' |
+| `getScale()` | Returns an array of pitches | 'scale_name', 'root', 'octave' |
+| `getRootFromInterval()` | Returns the root of an interval eg. MDSTheory.getRootFromInterval('G4','p5') will return 'C4' | 'note', 'interval' |
+| `chordFromNotes()` [experimental] | Returns the chord name | 'arr' take an array of notes eg. ['C4',E4'','G4'] |
 
 ### Notes ###
 

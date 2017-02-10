@@ -16,7 +16,7 @@ MDSTheory.MDSNoteMatrix[11] = ["B", "Cb","A##"];
 
 MDSTheory.MDSWhiteNoteMatrix = ["C","D","E","F","G","A","B"];
 
-MDSTheory.MDSKeySignatureMatrix = new Object(); //DO I NEED THIS?
+MDSTheory.MDSKeySignatureMatrix = {}; //DO I NEED THIS?
 MDSTheory.MDSKeySignatureMatrix["Cb"] = {type:"flat", accidentals:7, accidentalNames:["Bb","Eb","Ab","Db","Gb","Cb","Fb"]};
 MDSTheory.MDSKeySignatureMatrix["Gb"] = {type:"flat", accidentals:6, accidentalNames:["Bb","Eb","Ab","Db","Gb","Cb"]};
 MDSTheory.MDSKeySignatureMatrix["Db"] = {type:"flat", accidentals:5, accidentalNames:["Bb","Eb","Ab","Db","Gb"]};
@@ -33,7 +33,7 @@ MDSTheory.MDSKeySignatureMatrix["B"] = {type:"sharp", accidentals:5, accidentalN
 MDSTheory.MDSKeySignatureMatrix["F#"] = {type:"sharp", accidentals:6, accidentalNames:["F#","C#","G#","D#","A#","E#"]};
 MDSTheory.MDSKeySignatureMatrix["C#"] = {type:"sharp", accidentals:7, accidentalNames:["F#","C#","G#","D#","A#","E#","B#"]};
 
-MDSTheory.MDSIntervalMatrix = new Object();
+MDSTheory.MDSIntervalMatrix = {};
 MDSTheory.MDSIntervalMatrix[0] = ["p1","unison"];
 MDSTheory.MDSIntervalMatrix[1] = ["m2"];
 MDSTheory.MDSIntervalMatrix[2] = ["M2","dim3"];
@@ -65,9 +65,6 @@ MDSTheory.MDSScaleDictionary['Ousak'] = ["p1", "m2", "m3", "p4", "p5", "m6", "m7
 MDSTheory.MDSScaleDictionary['Hitzaz'] = ["p1", "m2", "M3", "p4", "p5", "m6", "m7"];
 MDSTheory.MDSScaleDictionary['Sabach'] = ["p1", "M2", "m3", "dim4", "p5", "m6", "m7"];
 MDSTheory.MDSScaleDictionary['Kiourdi'] = ["p1", "M2", "m3", "p4", "dim5", "M6", "m7"];
-
-MDSTheory.MDSChordDictionary = [];
-//Will be required by chordFromNotes()
 
 MDSTheory.splitPitch = function(n){
 // A helper function that takes a note value like Db4 and returns an array containing the pitch and octave separated
@@ -672,28 +669,15 @@ MDSTheory.defineChord = function(obj){
     return definition;
 };
 MDSTheory.chordFromNotes  = function(arr){
-/*
-arr = notes that include pitch + octave. eg. C#4
-THis function will create 
-Requires a chord dictionary
-This function will calculate intervals and then match them up in the chord dictionary. To start with, it won't be able to detect inversions.
-This function may  be redundant if used in Max4Live as Max will probably already have an object to do this.
-*/
 
 // Create new arrays for each combination.
 // Don't push() any duplicates into new arrays
 // Use adjustOctave() to keep all the notes within an octave of the root note
 /* 
 GENERAL STRATEGY:
-- Remove duplicate pitches
-- Dyads triads and quartads have separate dictionaries
-- Look for the base chord (triad or quartad) in the lowest 3-4 notes of the chord.
-- Each note above the base quartad will be considered an extension and be calculated using getIntervalFromNote
-
-NEW STRATEGY?
 - Sort notes into an array from lowest to highest.
 - Analyze the notes within an octave of the lowest note (limit of bottom note plus 3)
-- CONSTANT (Eureka!): Bottom note cannot be an upperextension! (7,9,13)
+- CONSTANT (Eureka!): Bottom note cannot be an upperextension! (7,9,13 etc)
   Therefore, bottom note must be 1,3,5, or 7!!
 - SOoooo....
 - We run tests assuming the bottom note is in the base chord.

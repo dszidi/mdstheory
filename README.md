@@ -30,8 +30,8 @@
 | `getInterval()` | Returns the calculated interval between two pitches | 'root pitch', 'interval pitch', 'adjust octave' |
 | `getNoteFromInterval()` | Returns the pitch of an interval | 'root_pitch', 'interval' eg. 'p5' |
 | `getScale()` | Returns an array of pitches | 'scale_name', 'root', 'octave' |
-| `getRootFromInterval()` | Returns the root of an interval eg. MDSTheory.getRootFromInterval('G4','p5') will return 'C4' | 'note', 'interval' |
-| `chordFromNotes()` [experimental] | Returns the chord name | 'arr' take an array of notes eg. ['C4',E4'','G4'] |
+| `getRootFromInterval()` | Returns the root of an interval eg. getRootFromInterval('G4','p5') will return 'C4' | 'note', 'interval' |
+| `chordFromNotes()` [experimental] | Returns the chord name | 'arr' eg. ['C4','E4','G4'] |
 
 ### Notes ###
 

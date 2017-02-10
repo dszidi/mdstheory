@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>MDSTheory Web Tester</title>
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+    /* Put styles here */
+    </style> 
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+      <div class="container">
+          <div class="row">
+            <div class="col-xs-12">
+                <h1>MDSTheory Web Tester!</h1>
+                Check the js console for results!
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="MDSTheory.js"></script> 
+    <script>
+        var theory = MDSTheory;
+        //var note = theory.MDSGetMatrixIndex("Eb");
+        //var note = theory.getNoteFromInterval("A4","M3");
+        //var note = theory.midiToNote(63,'flat');
+        //var note = theory.noteToMidi("C4");
+        //var note = theory.getInterval("C3","C#4");
+        //var note = theory.getPitchAlias("D");
+        //var note = theory.getRootFromInterval("C4","p5");
+        //var note = theory.whiteNoteCheck("C",4 * -1);
+        //var note = theory.getScale("Niavent","Eb","6");
+        //var note = theory.chordFromNotes(["Eb", "C", "G"]);/*NOT IMPLEMENTED YET*/
+        //var note = theory.adjustOctave("G5","D#4");
+        //var note = theory.splitPitch("G#4");
+        var chord = MDSTheory.chordFromNotes(["C3","E4","G3","A4","Bb2"]);        
+
+        //console.log("Note = " + note);
+        console.log("Chord = " + chord);
+
+    </script>
+
+  </body>
+</html>

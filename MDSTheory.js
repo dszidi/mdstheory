@@ -74,7 +74,7 @@ MDSTheory.splitPitch = function(n){
         //SEMANTICS
 	var octave = Number(n.match(/\d+/g));
 	var pitch = n.split(octave)[0];
-	console.log("Pitch = " + pitch + " && octave = " + octave); 
+	//console.log("Pitch = " + pitch + " && octave = " + octave); 
         var result = [pitch,octave];
         return result;
 }
@@ -387,40 +387,334 @@ MDSTheory.getScale  = function(scale,root,octave){
 	return result;
 }
 
-MDSTheory.getChord  = function(chord,key){
-return "This MDSTheory.is  = function incomplete";
+// CHORDS
+MDSTheory.getIntervalSemitones = function(interval){
+    // returns the number of semitones higher an interval is from it's root
+    for(var i in MDSTheory.MDSIntervalMatrix){
+        var test = MDSTheory.MDSIntervalMatrix[i]
+        if(test.indexOf(interval) !== -1){ return i;}
+    }
+}
+MDSTheory.getPitchAlias = function(pitch){
+    // Gets the next available note name for the same pitch
+    // Useful for correcting semantics.
+    var alias;
+    var index = MDSTheory.MDSGetMatrixIndex(pitch);
+    var aliases = MDSTheory.MDSNoteMatrix[index];
+    for(var i = aliases.length-1; i >=0; i--){
+        if(aliases[i] !== pitch){alias = aliases[i]}
+    }    
+    console.log("pitch: " + pitch + " alias: " + alias);
+    return alias;
+}
+MDSTheory.validateOctave = function(note,interval){
+    // validates octave by checking to see if two pitches are the same
+    // returns: boolean
+    var octave = false;
+    var nsp = MDSTheory.splitPitch(note);
+    var isp = MDSTheory.splitPitch(interval);
+    var checkNote = MDSTheory.MDSGetMatrixIndex(nsp[0]);
+    var checkInterval = MDSTheory.MDSGetMatrixIndex(isp[0]);
+    if(checkNote === checkInterval){octave = true}
+    return octave
+}
+MDSTheory.whiteNoteCheck = function(pitch, distance){
+    // returns the correct base pitch (white note) that is the specified distance
+    // to count distance descending, use a negative number
+    // tip: when calculating intervals shorten the distance by 1
+    //console.log("whiteNoteCheck args: pitch: " + pitch + " distance: " + distance);
+    var max = MDSTheory.MDSWhiteNoteMatrix.length;
+    /*if(pitch.length > 1){
+        console.log("wnc: " + pitch[0]);
+        //var p = pitch.split("");
+        pitch = pitch[0];
+    }*/
+    if(distance > max || distance < (max * -1)){
+        newIndex = MDSTheory.MDSWhiteNoteMatrix.length + newIndex
+        distance = distance % max;
+        //console.log("distance: " + distance);
+    }
+    var startIndex = MDSTheory.MDSWhiteNoteMatrix.indexOf(pitch[0]);
+    var newIndex = startIndex + distance;
+    if(newIndex < 0){newIndex = max + newIndex}
+    //console.log("newIndex = " + newIndex + " startIndex = " + startIndex);
+    return MDSTheory.MDSWhiteNoteMatrix[newIndex]
+}
+
+MDSTheory.getRootFromInterval = function(note,interval){
+    // Returns root
+    var spi = MDSTheory.splitPitch(note);
+    var pitch = spi[0].split(/[b|#]/);
+    //console.log("Args: " + note + "/" + interval);
+    note = MDSTheory.noteToMidi(note)
+    var st = MDSTheory.getIntervalSemitones(interval);
+    var r = note - st;
+    var root = MDSTheory.midiToNote(r);
+    // Force flats
+    //if(root.indexOf("#") !== -1){root = MDSTheory.midiToNote(r,"flat");}
+    
+    // Check semantics
+    var sp = MDSTheory.splitPitch(root);
+    var distance = interval.split(/[a-zA-Z#]/);
+    distance = distance[1] - 1;
+    if(interval === "unison"){distance = 0;}
+    //console.log("distance = " + distance);
+    var wnc = MDSTheory.whiteNoteCheck(pitch, distance * -1);
+    //console.log("note: " + pitch + " wnc: " + wnc);
+    if(sp[0] !== wnc){
+        var target = MDSTheory.MDSNoteMatrix;
+        for(var x in target){
+            if(target[x].indexOf(sp[0]) !== -1){
+                for(var y in target[x]){
+                    //var p = target[x][y].includes(wnc);
+                    var str = target[x][y];
+                    var p = false;
+                    for(var z in str){
+                        if(target[x][y][z] === wnc){p = true;}
+                    }
+                    if(p === true && target[x].length < 3){
+                        root = target[x][y] + sp[1];
+                    }
+                }
+            }
+        } // END FOR
+    } // END IF
+    return root;
+}
+
+MDSTheory.buildChord  = function(chord,key){
+return "This function is incomplete";
 }
 
 //INCOMPLETE
+MDSTheory.dyads = function(args){
+    // Returns root?
+    //console.log("dyads:" + args);
+    var arr = [];
+    arr[0] = MDSTheory.noteToMidi(args[0]);
+    arr[1] = MDSTheory.noteToMidi(args[1]);
+    //console.log("dyads:" + arr);
+    var diff = arr[1] - arr[0]; 
+    //console.log(diff);
+    var result = {root:"",chordName:""}
+    if(arr.length > 2){ return "ERROR: Too many notes";}
+    switch(diff){
+    case 1: 
+        result.root = arr[1];
+        result.chordName = "no3 Maj7"
+    break;
+    case 2: 
+        result.root = arr[1];
+        result.chordName = "no3 7"
+    break;
+    case 3: 
+        result.root = arr[0];
+        result.chordName = "m"
+    break;
+    case 4: 
+        result.root = arr[0];
+        result.chordName = "Maj"
+    break;
+    case 5: 
+        result.root = arr[1];
+        result.chordName = "5"
+    break;
+    case 6: 
+        result.root = arr[1];
+        result.chordName = "no3 b5"
+    break;
+    case 7: 
+        result.root = arr[0];
+        result.chordName = "5"
+    break;
+    case 8: 
+        result.root = arr[1];
+        result.chordName = "Maj"
+    break;
+    case 9: 
+        result.root = arr[1];
+        result.chordName = "m"
+    break;
+    case 10: 
+        result.root = arr[0];
+        result.chordName = "no3 7"
+    break;
+    case 11: 
+        result.root = arr[0];
+        result.chordName = "no3 Maj7"
+    break;
+    }
+    var sp = MDSTheory.splitPitch(MDSTheory.midiToNote(result.root));
+    result.root = sp[0];
+    return result;
+}
+MDSTheory.compareNotes = function(a,b){
+    return MDSTheory.noteToMidi(a) - MDSTheory.noteToMidi(b);
+}
+MDSTheory.analyzeChord = function(arr){
+	console.log("Chord Tones = " + arr);
+        var scenarios = ["unison","m3","M3","p5","m7","M7","octave"];
+        var leader = "unknown"; // Root, m3, M3, p5, 7, Maj7
+
+        // SORT arr FROM LOWEST NOTE TO HIGHEST NOTE
+        arr = arr.sort(MDSTheory.compareNotes);
+	console.log("Sorted Chord Tones = " + arr);
+        
+        // RUN TESTS FOR ROOT...
+	console.log("******** Master loop: " + arr[0] + " ********");
+            for(var y = 0; y < scenarios.length-1; y++){ // RUN EVERY SCENARIO EXCEPT OCTAVE
+                var root = MDSTheory.getRootFromInterval(arr[0],scenarios[y]);
+                var hasRoot = false;
+                console.log(" -- **** IF " + root + " IS ROOT **** Testing " + arr[0] + " as " + scenarios[y]);
+                var tally = {score:0,root:root,intervals:[],notes:[]}
+                for(var note in arr){ // CHECK INTERVALS IN THE SCENARIO
+                    var interval = MDSTheory.getInterval(root,arr[note]);
+                    tally.notes.push(arr[note]);
+                    tally.intervals.push(interval);
+                    if(interval === "octave"){
+                        var oct = MDSTheory.validateOctave(root,arr[note]);
+                        if(oct == false){
+                            var osp = MDSTheory.splitPitch(arr[note]);
+                            var newPitch = MDSTheory.getPitchAlias(osp[0]);
+                            interval = MDSTheory.getInterval(root,newPitch + osp[1]);
+                        }
+                    }
+                    
+                    //console.log(" -- " + root + " and " + arr[note] + " = " + interval);
+                    var point = scenarios.indexOf(interval);
+                    // Point for being a chord tone
+                    if(point >= 0 /*&& note < 4*/){
+                        tally.score++
+                        //tally.intervals.push(interval);
+                        console.log(" ---- chord tone found: " + arr[note] + " is a " + interval); 
+                    }
+                    // Extra point for having root
+                    if(arr[note] === root || interval === "octave"){ 
+                        hasRoot = true; 
+                        tally.score++
+                    }
+                }
+                if(leader === "unknown" || tally.score > leader.score){leader = tally}
+                console.log("******** Root = " + leader.root + " && Intervals = " + leader.intervals + " ********");
+            }
+
+        // COUNT THE SCORES & RETURN DATA...
+
+	//return "This MDSTheory.is  = function incomplete"
+        var result = leader;
+        return result;
+}
+MDSTheory.defineChord = function(obj){
+    var sp = MDSTheory.splitPitch(obj.root);
+    var definition = ""; 
+    
+    var sus = false;
+    var add = false;
+    var fifth = false;
+    var dim = false;
+    var sevenths = false;
+    // Check 7ths
+    if(obj.intervals.indexOf("m7") !== -1 || obj.intervals.indexOf("M7") !== -1){sevenths = true;}
+    if(obj.intervals.indexOf("m7") !== -1){definition += "7"}
+    if(obj.intervals.indexOf("M7") !== -1){definition += "maj7"}
+
+    // Check 3rds
+    if(obj.intervals.indexOf("m3") === -1 && obj.intervals.indexOf("M3") === -1){ sus = true;}
+    if(obj.intervals.indexOf("m3") !== -1){definition = "m" + definition}
+    // Check 5ths (mainly for diminished)
+    if(obj.intervals.indexOf("p5") !== -1){fifth = true;}
+    if(obj.intervals.indexOf("dim5") !== -1){
+        if(sevenths === true && fifth === false){definition += "/b5";}
+        else if(/*sevenths === false && */fifth === true){obj.intervals[obj.intervals.indexOf("dim5")] = "aug4"}
+        else if(sevenths === false && fifth === false && obj.intervals.indexOf("m3") !== -1){definition = "di" + definition; dim = true;}
+        //else if(seventh === true && fifth === true){}
+    } 
+    // Check 9ths
+    if(obj.intervals.indexOf("M2") !== -1){
+        if(sus === true){definition += "sus2"}
+        if(sus === false && sevenths === false){definition = "add9" + definition; add = true;}
+        if(sus === false && sevenths === true){definition += "/9"}
+    }
+    if(obj.intervals.indexOf("m2") !== -1){
+        //if(sus === true){definition += "sus2"}
+        if(sus === false && sevenths === false){definition = "addb9" + definition;}
+        if(sus === false && sevenths === true){definition += "/b9"}
+    }
+    // Check 6ths
+    if(obj.intervals.indexOf("M6") !== -1){
+        if(sevenths === true){
+            definition += "/13";
+        } else if(sevenths === false && add === true){
+            var removeAdd = definition.split("add");
+            definition = "6/" + removeAdd[1];
+            //console.log("removeAdd = " + removeAdd[1]);
+        } else {definition += "6";}
+        if(dim === true){
+            var dimSplit = definition.split("dim");
+            definition = "dim7" + dimSplit[1];
+        }
+    }
+    if(obj.intervals.indexOf("m6") !== -1){
+        if(sevenths === true && fifth === true){definition += "/b13"}
+        else if(obj.intervals.indexOf("M3") !== -1 && obj.intervals.indexOf("m3") === -1 && fifth === false){ definition = "aug" + definition}
+    }
+    //console.log(" ******** intervals = " + obj.intervals + " ********");
+    // Check 4ths
+    if(obj.intervals.indexOf("p4") !== -1 || obj.intervals.indexOf("11") !== -1){
+        if(sus === true){definition += "sus4"}
+        if(sus === false && sevenths === false){definition = "add11" + definition; add = true;}
+        if(sus === false && sevenths === true){definition += "/11"}
+    }
+    if(obj.intervals.indexOf("aug4") !== -1 || obj.intervals.indexOf("#11") !== -1){
+       definition += "/#11";
+    }
+    var definition = sp[0] + definition;
+    return definition;
+};
 MDSTheory.chordFromNotes  = function(arr){
 /*
+arr = notes that include pitch + octave. eg. C#4
+THis function will create 
 Requires a chord dictionary
-This MDSTheory.will  = function calculate intervals and then match them up in the chord dictionary. To start with, it won't be able to detect inversions.
-This MDSTheory.may  = function be redundant if used in Max4Live as Max will probably already have an object to do this.
+This function will calculate intervals and then match them up in the chord dictionary. To start with, it won't be able to detect inversions.
+This function may  be redundant if used in Max4Live as Max will probably already have an object to do this.
 */
 
-// Sort notes from lowest to highest
-// 
+// Create new arrays for each combination.
+// Don't push() any duplicates into new arrays
+// Use adjustOctave() to keep all the notes within an octave of the root note
+/* 
+GENERAL STRATEGY:
+- Remove duplicate pitches
+- Dyads triads and quartads have separate dictionaries
+- Look for the base chord (triad or quartad) in the lowest 3-4 notes of the chord.
+- Each note above the base quartad will be considered an extension and be calculated using getIntervalFromNote
 
-	console.log("Chord Tones = " + arr);
-	var origOrder = [];
-	var intervals = [];
-	for(var x in arr){
-	        var newMatrix = MDSTheory.flipAllNotes(arr[x]);
-                //console.log("newMatrix = " + newMatrix);
-	        var query;
-		origOrder.push(MDSTheory.MDSGetMatrixIndex(arr[x]));
-		var result;
-		for(var y in newMatrix){
-			query = newMatrix[y].indexOf(arr[x]);
-			if(query === 0){ result = y; }
-		}
-		//console.log(arr[x] + " = " + newMatrix);
-	}
-	//return "This MDSTheory.is  = function incomplete"
-        return result;
+NEW STRATEGY?
+- Sort notes into an array from lowest to highest.
+- Analyze the notes within an octave of the lowest note (limit of bottom note plus 3)
+- CONSTANT (Eureka!): Bottom note cannot be an upperextension! (7,9,13)
+  Therefore, bottom note must be 1,3,5, or 7!!
+- SOoooo....
+- We run tests assuming the bottom note is in the base chord.
+- We compare the bottom note to the others and count how many other 
+  possible base chord notes we would have in that scenario
+- Presence of root is a tie breaker 
+  
+
+*/
+    var result = "";
+    switch(arr.length){
+        case 2: result = MDSTheory.dyads(arr); break;
+        default: 
+            var notes = MDSTheory.analyzeChord(arr);
+            result = MDSTheory.defineChord(notes);;
+        break;
+        //default: console.log("Bigger than Triad");  break;
+    }
+    return result;
 }
 
 
 //For Testing in Node.js only
-module.exports = MDSTheory;
+//module.exports = MDSTheory;

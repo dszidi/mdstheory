@@ -16,7 +16,7 @@ MDSTheory.MDSNoteMatrix[11] = ["B", "Cb","A##"];
 
 MDSTheory.MDSWhiteNoteMatrix = ["C","D","E","F","G","A","B"];
 
-MDSTheory.MDSKeySignatureMatrix = {}; //DO I NEED THIS?
+MDSTheory.MDSKeySignatureMatrix = {}; 
 MDSTheory.MDSKeySignatureMatrix["Cb"] = {type:"flat", accidentals:7, accidentalNames:["Bb","Eb","Ab","Db","Gb","Cb","Fb"]};
 MDSTheory.MDSKeySignatureMatrix["Gb"] = {type:"flat", accidentals:6, accidentalNames:["Bb","Eb","Ab","Db","Gb","Cb"]};
 MDSTheory.MDSKeySignatureMatrix["Db"] = {type:"flat", accidentals:5, accidentalNames:["Bb","Eb","Ab","Db","Gb"]};
@@ -71,7 +71,7 @@ MDSTheory.splitPitch = function(n){
         //SEMANTICS
 	var octave = Number(n.match(/\d+/g));
 	var pitch = n.split(octave)[0];
-	//console.log("Pitch = " + pitch + " && octave = " + octave); 
+
         var result = [pitch,octave];
         return result;
 }
@@ -146,9 +146,7 @@ MDSTheory.noteToMidi  = function(n){
 	var s = n.split("");
 	var pitch = n.substring(0,s.length-1);
 	var octave = parseInt(s[s.length-1]);
-	//var type = MDSTheory.MDSGetMatrixType(n);
-	
-	//index = MDSTheory.MDSGetMatrixIndex(pitch,type);
+
 	for (var x in MDSTheory.MDSNoteMatrix){
 		var alias = MDSTheory.MDSNoteMatrix[x];
 		for (var y in alias){
@@ -158,7 +156,7 @@ MDSTheory.noteToMidi  = function(n){
 		}
 	}
 	result = octave * 12 + 12 + parseInt(index);
-	//console.log("noteToMidi: " + octave)
+
 	return result;
 }
 
@@ -175,7 +173,7 @@ if(int<21 || int > 108){
 	throw "Invalid Midi Note Number: Pitches range from 21 - 108";
 }
 
-//Find Octave and 
+//Find Octave 
 var octave = Math.floor(int / 12) - 1;
 index = int - ((octave + 1) * 12);
 switch(type){
@@ -210,7 +208,6 @@ return result+octave;
 }
 
 MDSTheory.getSemiTones  = function(x,y){
-	//console.log("x = " + noteToMidi(x) + " y = " + noteToMidi(y))
 	var result;
 	if ( isNaN(x) === true && isNaN(y) === true){ //if args are strings
 		result = MDSTheory.noteToMidi(y) - MDSTheory.noteToMidi(x);
@@ -252,21 +249,16 @@ MDSTheory.adjustOctave  = function(root,n){
 	*/
 	var adjNote;
 	var checkCents = MDSTheory.noteToMidi(n) - MDSTheory.noteToMidi(root)
-	//console.log('Checked semitones = ' + checkCents)
+
 	if(checkCents < 0 || checkCents > 13){
-		//console.log('lower than root: ' + checkOctaves);
-		//console.log('Distance in octaves: ' + (checkOctaves/12));
 		var distOct = checkCents/12;
 		var multiplier = Math.ceil(distOct*-1)
-		//console.log('Multiplier = ' + multiplier);
-		//console.log("new midi note = " + noteToMidi(n))		
 		var newMidiNote = MDSTheory.noteToMidi(n) + (12 * multiplier);
 		adjNote = MDSTheory.midiToNote(newMidiNote,MDSTheory.getNoteType(n));
 	} else {
-		//console.log('Note within range, note = ' + n)
 		adjNote = n;
 	}
-	//console.log('adjnote = ' + adjNote)
+
 	return adjNote
 }
 
@@ -288,7 +280,7 @@ MDSTheory.getInterval  = function(root, int, adj){
 	var st = MDSTheory.getSemiTones(root,int);
 	var base = MDSTheory.flipWhites(pitch);
 	var ai = base.indexOf(int.split("")[0])+1; //absoluteInterval 
-	//console.log("preconditional ai = " + ai)
+
 	 if (st === 12){
 		ai = 8;
 	} else if (st === 0){
@@ -296,11 +288,11 @@ MDSTheory.getInterval  = function(root, int, adj){
 	} else if(st > 11){
 		ai += 7;
 	}
-	//console.log("st = " + st + " && ai = " + ai)
+
 	for (var x in MDSTheory.MDSIntervalMatrix[st]){
 		var alias = MDSTheory.MDSIntervalMatrix[st][x];
 		var num;
-		//console.log("loop alias = " + alias)
+
 		switch(ai){
 		case 1:
 		result = "unison";
@@ -313,10 +305,9 @@ MDSTheory.getInterval  = function(root, int, adj){
 		default:
 		if(ai > 9){
 			num = alias.substring(alias.split("").length-2);
-			//console.log('condition: ai > 9... ai = ' + ai + ' && num = ' + num + "\n")
+
 		} else {
 			num = alias.substring(alias.split("").length-1);
-			//console.log('condition: else... ai = ' + ai + ' && num = ' + num + "\n");
 		}
 		if (parseInt(num) === ai){
 			result = alias;
@@ -335,7 +326,7 @@ MDSTheory.getInterval  = function(root, int, adj){
 }
 
 MDSTheory.getNoteFromInterval  = function(n, int){
-	//console.log("start MDSTheory.args  = function: note = " + n + " && interval = " + int)
+
 	var result;
 	var st;
 	var note = MDSTheory.noteToMidi(n);
@@ -347,14 +338,13 @@ MDSTheory.getNoteFromInterval  = function(n, int){
 	var newScale = MDSTheory.flipWhites(pitch);
 	var num = Number(int.match(/\d+/g));
 	var desc = int.match(/\D/);
-	//console.log("preconditional: num = " + num + " && desc = " + desc)
 	
 	//compensate for upper extensions when finding pitch name
 	if (num > 7){
 		num -= 7;
 	}
 	var ap = newScale[num-1];
-	//console.log("newScale = " + newScale + " && num = " + num)
+	
 	for (var x in MDSTheory.MDSIntervalMatrix){
 		var item = MDSTheory.MDSIntervalMatrix[x];
 		var test = item.indexOf(int);
